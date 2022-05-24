@@ -161,10 +161,6 @@ class ResultsScreen extends FlxSubState
 
         cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
-    #if android
-    addVirtualPad(NONE, A);
-    #end
-
 		super.create();
 	}
 
@@ -178,7 +174,7 @@ class ResultsScreen extends FlxSubState
 
         // keybinds
 
-        if (controls.ACCEPT)
+        if (PlayerSettings.player1.controls.ACCEPT)
         {
             music.fadeOut(0.3);
             
