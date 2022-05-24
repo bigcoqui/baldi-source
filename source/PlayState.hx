@@ -1218,6 +1218,10 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
+			
+		#if android
+		addAndroidControls();
+		#end
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1384,6 +1388,10 @@ class PlayState extends MusicBeatState
 	function startCountdown():Void
 	{
 		inCutscene = false;
+		
+		#if android
+		androidc.visible = true;
+		#end
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
@@ -2259,7 +2267,7 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.x = (originalX - (lengthInPx / 2)) + 335;
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -3006,6 +3014,9 @@ class PlayState extends MusicBeatState
 		vocals.volume = 0;
 		FlxG.sound.music.pause();
 		vocals.pause();
+		#if android
+		androidc.visible = false;
+		#end
 		if (SONG.validScore)
 		{
 			// adjusting the highscore song name to be compatible
