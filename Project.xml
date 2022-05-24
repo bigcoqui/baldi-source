@@ -27,7 +27,7 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false"/>
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false"/>
 
 	<!--Switch-specific-->
 	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
@@ -123,9 +123,8 @@
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
-	<haxelib name="newgrounds"/>
+	<haxelib name="newgrounds" unless="android"/>
 	<haxelib name="faxe" if='switch'/>
-	<haxelib name="polymod"/>
 	<haxelib name="discord_rpc" if="windows"/>
 	<haxelib name="linc_luajit" if="windows"/>
 
@@ -168,6 +167,9 @@
 
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	
+  <!-- make's game use less ram -->
+  <haxedef name="HXCPP_GC_BIG_BLOCKS"/>
 
 	<!-- _________________________________ Custom _______________________________ -->
 
