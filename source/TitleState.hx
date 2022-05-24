@@ -58,17 +58,31 @@ class TitleState extends MusicBeatState
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
+
+		#if polymod
+		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
+		#end
+		
+		#if sys
+		if (!sys.FileSystem.exists(#if android Main.path #else Sys.getCwd() #end + "/assets/replays"))
+			sys.FileSystem.createDirectory(#if android Main.path #else Sys.getCwd() #end + "/assets/replays");
+		#end
+
+		@:privateAccess
+		{
+			trace("Loaded " + openfl.Assets.getLibrary("default").assetsLoaded + " assets (DEFAULT)");
+		}
 		
 		PlayerSettings.init();
 
-		/*#if windows
+		#if windows
 		DiscordClient.initialize();
 
 		Application.current.onExit.add (function (exitCode) {
 			DiscordClient.shutdown();
 		 });
 		 
-		#end*/
+		#end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
